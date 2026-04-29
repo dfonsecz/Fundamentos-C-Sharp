@@ -5,11 +5,13 @@ class Program {
     static int cantidadNegativos = 0;
     static int cantidadCeros = 0;
 
+    // Método para obtener un número entero como entrada
     static int obtenerNumero() {
         int numero = int.Parse(Console.ReadLine());
         return numero;
     }
 
+    // Método para clasificar números como positivos, negativos o ceros e incrementar contador respectivo
     static void clasificarNumero(int numero) {
         if (numero > 0) {
             cantidadPositivos++;
@@ -23,6 +25,7 @@ class Program {
     }
     
     static void Main() {
+        // Solicitar entrada
         Console.WriteLine("¿Cuántos números desea ingresar? ");
         int cantidadNumeros = obtenerNumero();
 
@@ -32,6 +35,7 @@ class Program {
             clasificarNumero(numero);
         }
 
+        // Imprimir resultados
         Console.WriteLine("Resultados:");
         Console.WriteLine("Números positivos: " + cantidadPositivos);
         Console.WriteLine("Números negativos: " + cantidadNegativos);
