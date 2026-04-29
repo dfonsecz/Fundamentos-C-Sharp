@@ -31,5 +31,10 @@ class Program {
             int numero = obtenerNumero();
             clasificarNumero(numero);
         }
+
+        Console.WriteLine("Resultados:");
+        Console.WriteLine("Números positivos: " + cantidadPositivos);
+        Console.WriteLine("Números negativos: " + cantidadNegativos);
+        Console.WriteLine("Cantidad de ceros: " + cantidadCeros);
     }
 }
