@@ -7,7 +7,12 @@ class Program {
 
     // Método para obtener un número entero como entrada
     static int obtenerNumero() {
-        int numero = int.Parse(Console.ReadLine());
+        int numero;
+        
+        while (!int.TryParse(Console.ReadLine(), out numero)) {
+            Console.Write("Entrada inválida. Ingrese un número entero: ");
+        }
+
         return numero;
     }
 
@@ -26,17 +31,17 @@ class Program {
     
     static void Main() {
         // Solicitar entrada
-        Console.WriteLine("¿Cuántos números desea ingresar? ");
+        Console.Write("¿Cuántos números desea ingresar? ");
         int cantidadNumeros = obtenerNumero();
 
         for (int i = 0; i < cantidadNumeros; i++) {
-            Console.WriteLine("Ingrese el número " + (i + 1) + ": ");
+            Console.Write("Ingrese el número " + (i + 1) + ": ");
             int numero = obtenerNumero();
             clasificarNumero(numero);
         }
 
         // Imprimir resultados
-        Console.WriteLine("Resultados:");
+        Console.WriteLine("\nResultados:");
         Console.WriteLine("Números positivos: " + cantidadPositivos);
         Console.WriteLine("Números negativos: " + cantidadNegativos);
         Console.WriteLine("Cantidad de ceros: " + cantidadCeros);
