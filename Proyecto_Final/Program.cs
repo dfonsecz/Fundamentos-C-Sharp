@@ -34,6 +34,7 @@ class Viaje
 
     public void MostrarInformacion() {
         Console.WriteLine();
+        Console.WriteLine("===== INFORMACIÓN DEL VIAJE =====");
         Console.WriteLine("Cliente: " + nombre_cliente);
         Console.WriteLine("Conductor: " + nombre_conductor);
         Console.WriteLine("Distancia: " + distancia_viaje + " km");
@@ -41,6 +42,11 @@ class Viaje
             Console.WriteLine("Precio: ₡" + precio_viaje);
         } else {
             Console.WriteLine("Precio: No se ha calculado el precio del viaje.");
+        }
+        if (distancia_viaje > 10) {
+            Console.WriteLine("\nEste se trata de un viaje largo.");
+        } else {
+            Console.WriteLine("\nEste se trata de un viaje corto.");
         }
     }
 
@@ -51,8 +57,8 @@ class Viaje
 
 class Program {
 
-    static void PrintMenu() {
-        Console.WriteLine("===== MINI UBER =====");
+    static void ImprimirMenu() {
+        Console.WriteLine("\n===== MINI UBER =====");
         Console.WriteLine("1. Registrar Viaje");
         Console.WriteLine("2. Mostrar información del viaje");
         Console.WriteLine("3. Calcular precio");
@@ -72,21 +78,50 @@ class Program {
         Viaje viaje = new Viaje();
         viaje.ActualizarInformacionViaje(nombre_cliente, nombre_conductor, distancia_viaje);
 
-        Console.WriteLine("Viaje registrado correctamente.");
+        Console.WriteLine("\nViaje registrado correctamente.");
         return viaje;
     }
 
-    static void MostrarInformacionViaje(Viaje viaje) {
-        if (viaje != null) {
-            viaje.MostrarInformacion();
-        } else {
-            Console.WriteLine("No se ha registrado este viaje aún.");
-        }
-    }
-
     static void Main() {
-        // Ejemplo mínimo: registrar un viaje y mostrar su información
-        Viaje viaje = RegistrarViaje();
-        MostrarInformacionViaje(viaje);
+        bool continuar = true;
+        string opcion = "";
+        Viaje viaje = null;
+
+        while (continuar) {
+            ImprimirMenu();
+
+            // Manejo de opciones del menú
+            Console.Write("\nSeleccione una opción: ");
+            opcion = Console.ReadLine() ?? "";
+            Console.WriteLine();
+
+            switch (opcion) {
+                case "1":
+                    viaje = RegistrarViaje();
+                    break;
+                case "2":
+                    if (viaje != null) {
+                        viaje.MostrarInformacion();
+                    } else {
+                        Console.WriteLine("No se ha registrado ningún viaje aún.");
+                    }
+                    break;
+                case "3":
+                    if (viaje != null) {
+                        viaje.CalcularPrecio();
+                        Console.WriteLine("Precio calculado correctamente.");
+                    } else {
+                        Console.WriteLine("No se ha registrado ningún viaje aún.");
+                    }
+                    break;
+                case "4":
+                    continuar = false;
+                    Console.WriteLine("Saliendo del programa...");
+                    break;
+                default:
+                    Console.WriteLine("Opción inválida. Por favor, seleccione una opción del menú.");
+                    break;
+            }
+        }
     }
 }
